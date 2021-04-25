@@ -1,51 +1,22 @@
-## 优雅的使用常量命名
+## 使用 Logic 开发模式
+>根据数据表自动生成对应的 controller, logic, model, validate 文件
 
-- 常量定义如下
-
-```
-<?php
-
-declare (strict_types = 1);
-
-namespace App\Constants;
-
-class ErrorCode
-{
-    /**
-     * @Message("操作成功")
-     */
-    const SUCCESS = 200;
-
-    /**
-     * @Message("操作失败")
-     */
-    const ERROR = 400;
-}
-```
-
-## 安装
+- 命令
 
 ```
-composer require sorry510/constant
+php artisan mvl -m 模块 -t 表名
 ```
 
-#### 使用
-
-- 生成demo文件
+- help
 
 ```
-php artisan vendor:publish --tag=constant
+php artisan mvl -h
 ```
->PS: 凡是在app/Constants 目录下的php文件，内部的所有常量，均会被注入到统一的常量列表数组中
 
-
-- 获取信息
+### 数据表要求
+- 数据表的字段和注释分别自动生成对应的代码
+- 枚举类型使用 enum 类型,注释标准编写如下，可以自动生成对应的常量和数据封装函数
 
 ```
-<?php
-
-use App\Constants\ErrorCode
-
-$message = getConstMessage(ErrorCode::SUCCESS); // 操作成功
-
+状态[1:正常,2:禁止,3:未知]
 ```
