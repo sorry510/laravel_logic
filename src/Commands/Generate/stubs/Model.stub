@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace App\Models\%MODULE%;
+
+use Sorry510\Base\Model;
+%SOFTDELETE_NAMESPACE%
+%COLUMNS%
+class %TABLE%Model extends Model
+{
+%SOFTDELETE_CLASS%
+%CONST%
+    protected $table = '%TABLENAME%';
+%UPDATETIME%
+%CREATETIME%
+    protected $appends = [%APPEND%];
+    
+    protected $casts = [%CASTS%];
+%TOFIXED%
+%DATEDEAL%
+%FUNC%
+}

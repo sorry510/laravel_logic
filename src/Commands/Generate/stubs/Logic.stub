@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Logic\%MODULE%;
+
+use App\Models\%MODULE%\%TABLE%Model;
+use Sorry510\Base\Logic;
+
+class %TABLE%Logic extends Logic
+{
+    public function get(int $%PK%): ?%TABLE%Model
+    {
+        return %TABLE%Model::find($%PK%);
+    }
+
+    public function getList(array $data): Object
+    {
+        return %TABLE%Model::paginate($data["limit"]);
+    }
+
+    public function create(array $data): %TABLE%Model
+    {
+        $%LTABLE% = %TABLE%Model::create($data); // create 方法返回保存后的模型实例
+        return $%LTABLE%;
+    }
+
+    public function save(int $%PK%, array $data): ?%TABLE%Model
+    {
+        $%LTABLE% = %TABLE%Model::find($%PK%);
+        if (!$%LTABLE%) {
+            return null;
+        }
+        $%LTABLE%->fill($data);
+        $%LTABLE%->save();
+        return $%LTABLE%;
+    }
+
+    public function del(int $%PK%): int
+    {
+        return %TABLE%Model::destroy($%PK%);
+    }
+}

@@ -1,0 +1,209 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers\%MODULE%;
+
+use App\Constants\ErrorCode;
+use App\Http\Logic\%MODULE%\%TABLE%Logic;
+use App\Http\Requests\%MODULE%\%TABLE%Validate;
+use OpenApi\Annotations as OA;
+use Illuminate\Http\Request;
+use Sorry510\Annotations\RequestParam;
+use Sorry510\Annotations\Validator;
+use Sorry510\Base\Controller; 
+
+class %TABLE%Controller extends Controller
+{
+    /**
+     * @var %TABLE%Logic
+     */
+    protected $%LTABLE%Logic;
+
+    public function __construct(%TABLE%Logic $%LTABLE%Logic) {
+        $this->%LTABLE%Logic = $%LTABLE%Logic;
+    }
+
+    /**
+     * @OA\post(
+     *     tags={""},
+     *     path="",
+     *     summary="",
+     *     permission="",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+%REQDATA%
+     *                 required={""}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Success", @OA\JsonContent(
+     *         @OA\Property(property="code", type="integer", description="返回码"),
+     *         @OA\Property(property="message", type="string", description="错误信息"),
+     *         @OA\Property(property="data", type="object", description="返回数据"),
+     *         @OA\Property(property="timestamp", type="integer", description="服务器响应的时间戳"),
+     *         required={"code", "message", "data", "timestamp"}
+     *     ))
+     * )
+     * 
+     * @Validator(class=%TABLE%Validate::class, scene="add")
+     */
+    public function add(Request $request)
+    {
+        // 接受参数
+        $params = $request->only('');
+        
+        try {
+            // 进行添加操作
+            $%LTABLE% = $this->%LTABLE%Logic->create($params);
+            return resJson(ErrorCode::SUCCESS);
+        } catch (\Throwable $e) {
+            return resJson(ErrorCode::ERROR, $e->getMessage());
+        }
+    }
+
+    /**
+     * @OA\put(
+     *     tags={""},
+     *     path="",
+     *     summary="",
+     *     permission="",
+     *     @OA\Parameter(name="%PK%", in="path", description="唯一标识", required=true),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+%REQDATA%
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Success", @OA\JsonContent(
+     *         @OA\Property(property="code", type="integer", description="返回码"),
+     *         @OA\Property(property="message", type="string", description="错误信息"),
+     *         @OA\Property(property="data", type="object", description="返回数据"),
+     *         @OA\Property(property="timestamp", type="integer", description="服务器响应的时间戳"),
+     *         required={"code", "message", "data", "timestamp"}
+     *     ))
+     * )
+     * 
+     * @Validator(class=%TABLE%Validate::class, scene="edit")
+     */
+    public function edit(Request $request, int $%PK%)
+    {
+        // 接受参数
+        $params = $request->only("");
+
+        try {
+            // 进行修改操作
+            $result = $this->%LTABLE%Logic->save($%PK%, $params);
+            if ($result) {
+                return resJson(ErrorCode::SUCCESS);
+            }
+            return resJson(ErrorCode::DATA_NO_EXIST);
+        } catch (\Throwable $e) {
+            return resJson(ErrorCode::ERROR, $e->getMessage());
+        }
+    }
+
+    /**
+     * @OA\get(
+     *     tags={""},
+     *     path="",
+     *     summary="",
+     *     permission="",
+     *     @OA\Parameter(name="%PK%", required=true, in="path", description="唯一标识"),
+     *     @OA\Response(response=200, description="Success", @OA\JsonContent(
+     *         @OA\Property(property="code", type="integer", description="返回码"),
+     *         @OA\Property(property="message", type="string", description="错误信息"),
+     *         @OA\Property(property="data", type="object", description="返回数据",
+     *             @OA\Property(property="%PK%", type="integer", description="唯一标识"),
+%RESDATA%
+     *         ),
+     *         @OA\Property(property="timestamp", type="integer", description="服务器响应的时间戳"),
+     *         required={"code", "message", "data", "timestamp"}
+     *     ))
+     * )
+     */
+    public function get(Request $request, int $%PK%)
+    {
+        // 进行查询操作
+        $info = $this->%LTABLE%Logic->get($%PK%);
+        if ($info) {
+            return resJson(ErrorCode::SUCCESS, $info);
+        }
+        return resJson(ErrorCode::DATA_NO_EXIST);
+    }
+
+    /**
+     * @OA\get(
+     *     tags={""},
+     *     path="",
+     *     summary="",
+     *     permission="",
+     *     @OA\Parameter(name="page", in="query", description="页数"),
+     *     @OA\Parameter(name="limit", in="query", description="每页数量"),
+     *     @OA\Response(response=200, description="Success", @OA\JsonContent(
+     *         @OA\Property(property="code", type="integer", description="返回码"),
+     *         @OA\Property(property="message", type="string", description="错误信息"),
+     *         @OA\Property(property="data", type="object", description="返回数据",
+     *             @OA\Property(property="meta", type="object", description="元信息",
+     *                 @OA\Property(property="count", type="integer", description="当前页的项目数"),
+     *                 @OA\Property(property="perPage", type="integer", description="每页显示的项目数"),
+     *                 @OA\Property(property="currentPage", type="integer", description="当前页码"),
+     *                 @OA\Property(property="lastPage", type="integer", description="最后一页的页码"),
+     *                 @OA\Property(property="total", type="integer", description="总数"),
+     *             ),
+     *             @OA\Property(property="list", type="array", description="数据列表", @OA\Items(type="object",
+     *                 @OA\Property(property="%PK%", type="integer", description="唯一标识"),
+%RESDATA2%
+     *             )),
+     *         ),
+     *         @OA\Property(property="timestamp", type="integer", description="服务器响应的时间戳"),
+     *         required={"code", "message", "data", "timestamp"}
+     *     ))
+     * )
+     *
+     * @RequestParam(fields={"page": 1, "limit": 10})
+     */
+    public function getList(Request $request)
+    {
+        // 接受参数
+        $params = $request->only("limit");
+
+        // 进行查询操作
+        $list = $this->%LTABLE%Logic->getList($params);
+        return resJson(ErrorCode::SUCCESS, $list);
+    }
+
+    /**
+     * @OA\delete(
+     *     tags={""},
+     *     path="",
+     *     summary="",
+     *     permission="",
+     *     @OA\Parameter(name="id", required=true, in="path", description="唯一标识"),
+     *     @OA\Response(response=200, description="Success", @OA\JsonContent(
+     *         @OA\Property(property="code", type="integer", description="返回码"),
+     *         @OA\Property(property="message", type="string", description="错误信息"),
+     *         @OA\Property(property="data", type="object", description="返回数据"),
+     *         @OA\Property(property="timestamp", type="integer", description="服务器响应的时间戳"),
+     *         required={"code", "message", "data", "timestamp"}
+     *     ))
+     * )
+     */
+    public function del(Request $request, int $%PK%)
+    {
+        try {
+            // 进行删除操作
+            $result = $this->%LTABLE%Logic->del($%PK%);
+            if ($result) {
+                return resJson(ErrorCode::SUCCESS);
+            }
+            return resJson(ErrorCode::DATA_NO_EXIST);
+        } catch (\Throwable $e) {
+            return resJson(ErrorCode::ERROR, $e->getMessage());
+        }
+    }
+}

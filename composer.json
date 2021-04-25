@@ -1,0 +1,39 @@
+{
+    "name": "sorry510/logic",
+    "description": "laravel mvc",
+    "keywords": ["laravel", "mvc"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sorry510",
+            "email": "491559675@qq.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "ext-json": "*",
+        "laravel/framework": "^8.0",
+        "sorry510/annotation": "dev-master",
+        "sorry510/constant": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sorry510\\": "src/"
+        },
+        "files": [
+            "src/helper.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sorry510\\LogicProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

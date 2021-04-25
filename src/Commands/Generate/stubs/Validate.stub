@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Requests\%MODULE%;
+
+use Sorry510\Annotations\Validate\Validate;
+
+class %TABLE%Validate extends Validate
+{
+    /**
+     * 验证规则
+     * @return Array
+     */
+    protected function rule(): array
+    {
+        return [
+        ];
+    }
+
+    /**
+     * 提示信息 attribute是占位符，这里是custom方法的value
+     * @var Array
+     */
+    protected $message = [
+    ];
+
+    /**
+     * 自定义字段名称，提示的时候用到
+     * @var Array
+     */
+    protected $custom = [
+    ];
+
+    /**
+     * @var Array
+     */
+    protected $scene = [
+        'add' => [],
+        'edit' => [],
+    ];
+}
