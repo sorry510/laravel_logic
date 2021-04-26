@@ -49,7 +49,7 @@ class LogicProvider extends ServiceProvider
     protected function publishConfig()
     {
         $this->publishes([
-            __DIR__ . 'Base' => app_path('Base'),
+            __DIR__ . '/Base' => app_path('Base'),
         ], 'logic');
     }
 }
