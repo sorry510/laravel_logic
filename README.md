@@ -1,6 +1,20 @@
 ## 使用 Logic 开发模式
 >根据数据表自动生成对应的 controller, logic, model, validate 文件
 
+## 安装
+
+```
+composer require sorry510/logic
+```
+
+#### 使用
+
+- 生成基类
+
+```
+php artisan vendor:publish --tag=logic
+```
+
 - 命令
 
 ```
