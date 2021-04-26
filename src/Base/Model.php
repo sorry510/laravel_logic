@@ -1,13 +1,12 @@
 <?php
 
-namespace Sorry510\Base;
+namespace App\Base;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
- * Undocumented class
  * {@inheritdoc}
  * @Author sorry510 491559675@qq.com
  * @DateTime 2021-03-10

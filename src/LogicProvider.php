@@ -19,7 +19,7 @@ class LogicProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->publishConfig();
     }
 
     /**
@@ -44,5 +44,12 @@ class LogicProvider extends ServiceProvider
     public function boot()
     {
         $this->registerCommands();
+    }
+
+    protected function publishConfig()
+    {
+        $this->publishes([
+            __DIR__ . 'Base' => app_path('Base'),
+        ], 'logic');
     }
 }

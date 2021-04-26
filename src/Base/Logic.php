@@ -1,6 +1,6 @@
 <?php
 
-namespace Sorry510\Base;
+namespace App\Base;
 
 /**
  * 基础logic类

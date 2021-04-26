@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Logic\%MODULE%;
 
+use App\Base\Logic;
 use App\Models\%MODULE%\%TABLE%Model;
-use Sorry510\Base\Logic;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class %TABLE%Logic extends Logic
 {
@@ -14,14 +15,23 @@ class %TABLE%Logic extends Logic
         return %TABLE%Model::find($%PK%);
     }
 
-    public function getList(array $data): Object
+    /**
+     * @param  array|mixed  $data
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAll(array $data): LengthAwarePaginator
+    {
+        return %TABLE%Model::all();
+    }
+
+    public function getList(array $data): LengthAwarePaginator
     {
         return %TABLE%Model::paginate($data["limit"]);
     }
 
     public function create(array $data): %TABLE%Model
     {
-        $%LTABLE% = %TABLE%Model::create($data); // create 方法返回保存后的模型实例
+        $%LTABLE% = %TABLE%Model::create($data);
         return $%LTABLE%;
     }
 
@@ -39,5 +49,15 @@ class %TABLE%Logic extends Logic
     public function del(int $%PK%): int
     {
         return %TABLE%Model::destroy($%PK%);
+    }
+
+    public function restore(int $id): ?%TABLE%Model
+    {
+        $%LTABLE% = %TABLE%Model::onlyTrashed()->find($id);
+        if (!$%LTABLE%) {
+            return null;
+        }
+        $%LTABLE%->restore();
+        return $%LTABLE%;
     }
 }
