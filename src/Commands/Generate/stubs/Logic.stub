@@ -19,7 +19,7 @@ class %TABLE%Logic extends Logic
      * @param  array|mixed  $data
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getAll(array $data): LengthAwarePaginator
+    public function getAll(array $data)
     {
         return %TABLE%Model::all();
     }
