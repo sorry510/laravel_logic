@@ -104,8 +104,8 @@ class Mvl extends Command
             $this->warn("warning: Controllers\{$this->module}下已存在{$this->tableFormat}Controller.php");
             return;
         }
-        if (file_exists(root_path('stubs/mvl/Controller.stub'))) {
-            $stub = file_get_contents(root_path('stubs/mvl/Controller.stub'));
+        if (file_exists(base_path('stubs/mvl/Controller.stub'))) {
+            $stub = file_get_contents(base_path('stubs/mvl/Controller.stub'));
         } else {
             $stub = file_get_contents(__DIR__ . '/stubs/Controller.stub');
         }
@@ -132,8 +132,8 @@ class Mvl extends Command
             $this->warn("warning: Logic\{$this->module}下已存在{$this->tableFormat}Logic.php");
             return;
         }
-        if (file_exists(root_path('stubs/mvl/Logic.stub'))) {
-            $stub = file_get_contents(root_path('stubs/mvl/Logic.stub'));
+        if (file_exists(base_path('stubs/mvl/Logic.stub'))) {
+            $stub = file_get_contents(base_path('stubs/mvl/Logic.stub'));
         } else {
             $stub = file_get_contents(__DIR__ . '/stubs/Logic.stub');
         }
@@ -158,8 +158,8 @@ class Mvl extends Command
             $this->warn("warning: Models\{$this->module}下已存在{$this->tableFormat}Model.php");
             return;
         }
-        if (file_exists(root_path('stubs/mvl/Model.stub'))) {
-            $stub = file_get_contents(root_path('stubs/mvl/Model.stub'));
+        if (file_exists(base_path('stubs/mvl/Model.stub'))) {
+            $stub = file_get_contents(base_path('stubs/mvl/Model.stub'));
         } else {
             $stub = file_get_contents(__DIR__ . '/stubs/Model.stub');
         }
@@ -184,8 +184,8 @@ class Mvl extends Command
             $this->warn("warning: Requests\{$this->module}下已存在{$this->tableFormat}Validate.php");
             return;
         }
-        if (file_exists(root_path('stubs/mvl/Validate.stub'))) {
-            $stub = file_get_contents(root_path('stubs/mvl/Validate.stub'));
+        if (file_exists(base_path('stubs/mvl/Validate.stub'))) {
+            $stub = file_get_contents(base_path('stubs/mvl/Validate.stub'));
         } else {
             $stub = file_get_contents(__DIR__ . '/stubs/Validate.stub');
         }
