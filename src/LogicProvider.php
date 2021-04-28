@@ -51,5 +51,8 @@ class LogicProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/Base' => app_path('Base'),
         ], 'logic');
+        $this->publishes([
+            __DIR__ . '/Commands/Generate/stubs' => root_path('stubs/mvl'),
+        ], 'logic');
     }
 }
